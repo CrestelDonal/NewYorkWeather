@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#2E7D32"
+            app:title="@string/app_name"
+            app:titleTextColor="@android:color/white" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/contentContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                android:background="#F5F5F5">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- Search Section with AutoCompleteTextView -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/searchTextInputLayout"
+                        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:hint="@string/search_hint">
+
+                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                            android:id="@+id/searchAutoCompleteTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:imeOptions="actionSearch"
+                            android:inputType="textCapWords"
+                            android:maxLines="1"
+                            android:completionThreshold="2" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Top Section (Preserved IDs & Design) -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/cityText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="28sp"
+                            android:textStyle="bold"
+                            android:textColor="#212121"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/weatherIcon"
+                            android:layout_marginEnd="16dp"
+                            tools:text="New York" />
+
+                        <TextView
+                            android:id="@+id/mainText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="20sp"
+                            android:textColor="#424242"
+                            android:layout_marginTop="8dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/cityText"
+                            app:layout_constraintEnd_toStartOf="@id/weatherIcon"
+                            android:layout_marginEnd="16dp"
+                            tools:text="Clear" />
+
+                        <TextView
+                            android:id="@+id/descriptionText"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textColor="#616161"
+                            android:layout_marginTop="4dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/mainText"
+                            app:layout_constraintEnd_toStartOf="@id/weatherIcon"
+                            android:layout_marginEnd="16dp"
+                            tools:text="Clear sky" />
+
+                        <ImageView
+                            android:id="@+id/weatherIcon"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:background="@drawable/bg_weather_icon"
+                            android:contentDescription="@string/weather_icon_desc"
+                            android:scaleType="fitCenter"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:src="@drawable/ic_weather_placeholder" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <!-- Weather Details Card -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/detailsCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="2dp"
+                        app:strokeWidth="0dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <TextView
+                                android:id="@+id/tempText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="36sp"
+                                android:textStyle="bold"
+                                android:textColor="#212121"
+                                tools:text="12°C" />
+
+                            <TextView
+                                android:id="@+id/feelsLikeText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="16sp"
+                                android:textColor="#424242"
+                                android:layout_marginTop="4dp"
+                                tools:text="Feels like 10°C" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="12dp"
+                                android:layout_marginBottom="12dp"
+                                android:background="#E0E0E0" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/humidityText"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:textSize="15sp"
+                                    android:textColor="#616161"
+                                    tools:text="Humidity: 65%" />
+
+                                <TextView
+                                    android:id="@+id/windText"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:textSize="15sp"
+                                    android:textColor="#616161"
+                                    tools:text="Wind: 4.5 m/s" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone" />
+
+        </FrameLayout>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</LinearLayout>
